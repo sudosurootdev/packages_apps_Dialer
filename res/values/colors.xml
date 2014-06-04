@@ -139,4 +139,15 @@
     <!-- Color of action bar text. Ensure this stays in sync with packages/Telephony
          phone_settings_actionbar_text_color-->
     <color name="actionbar_text_color">#FFFFFF</color>
+
+    <!-- Colors for incoming and outgoing calls in the call statistics -->
+    <color name="call_stats_incoming">#33b5e5</color>
+    <color name="call_stats_outgoing">#99cc00</color>
+    <color name="call_stats_missed">#eb1313</color>
+    <color name="call_stats_bar_background">#88888888</color>
+
+    <!-- Text color for google dialer settings -->
+    <color name="google_settings_text_color">#ff555555</color>
+    <!-- Background google dialer settings -->
+    <color name="google_settings_background">#ffdedede</color>
 </resources>
