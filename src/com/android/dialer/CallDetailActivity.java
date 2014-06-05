@@ -433,13 +433,35 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         mAsyncTaskExecutor.submit(Tasks.UPDATE_PHONE_CALL_DETAILS, new UpdateContactDetailsTask());
     }
 
-                    try {
-                        startActivity(actionIntent);
-                    } catch (ActivityNotFoundException e) {
-                        final Toast toast = Toast.makeText(CallDetailActivity.this,
-                                R.string.add_contact_not_available, Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
+    private void bindContactPhotoAction(final Intent actionIntent, int actionIcon,
+        String actionDescription) {
+    if (actionIntent == null) {
+        mMainActionView.setVisibility(View.INVISIBLE);
+        mMainActionPushLayerView.setVisibility(View.GONE);
+        mHeaderTextView.setVisibility(View.INVISIBLE);
+        mHeaderOverlayView.setVisibility(View.INVISIBLE);
+    } else {
+        mMainActionView.setVisibility(View.VISIBLE);
+        mMainActionView.setImageResource(actionIcon);
+        mMainActionPushLayerView.setVisibility(View.VISIBLE);
+        mMainActionPushLayerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    startActivity(actionIntent);
+                } catch (ActivityNotFoundException e) {
+                    final Toast toast = Toast.makeText(CallDetailActivity.this,
+                        R.string.add_contact_not_available, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+        });
+        mMainActionPushLayerView.setContentDescription(actionDescription);
+        mHeaderTextView.setVisibility(View.VISIBLE);
+        mHeaderOverlayView.setVisibility(View.VISIBLE);
+        }
+    }
+
     /** Return the phone call details for a given call log URI. */
     private PhoneCallDetails getPhoneCallDetailsForUri(Uri callUri) {
         ContentResolver resolver = getContentResolver();
